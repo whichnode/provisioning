@@ -127,6 +127,9 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 echo "Installed Rust toolchain:"
 rustup show
 
+# Install Libra build dependencies
+sudo apt install -y build-essential lld pkg-config libssl-dev libgmp-dev clang
+
 # End of long if block: Skip the package install stuff if so directed
 fi
 
