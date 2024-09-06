@@ -121,6 +121,11 @@ sudo apt -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin d
 # Allow the current user to use Docker
 sudo usermod -aG docker $USER
 
+# Install Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+echo "Installed Rust toolchain:"
+rustup show
+
 # End of long if block: Skip the package install stuff if so directed
 fi
 
