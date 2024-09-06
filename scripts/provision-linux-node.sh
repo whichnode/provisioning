@@ -125,7 +125,7 @@ sudo usermod -aG docker $USER
 echo "Installing Rust toolchain"
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 echo "Installed Rust toolchain:"
-rustup show
+$HOME/.cargo/bin/rustup show
 
 # Install Libra build dependencies
 sudo apt install -y build-essential lld pkg-config libssl-dev libgmp-dev clang
