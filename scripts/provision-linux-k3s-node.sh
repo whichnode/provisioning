@@ -90,7 +90,7 @@ sudo apt install -y build-essential lld pkg-config libssl-dev libgmp-dev clang
 
 echo "**************************************************************************************"
 echo "Installing k3s"
-k3s_installer_file=install-k3s.sh
+k3s_installer_file=$HOME/install-k3s.sh
 curl -sfL https://get.k3s.io -o ${k3s_installer_file}
 chmod +x ${k3s_installer_file}
 sudo ${k3s_installer_file}
