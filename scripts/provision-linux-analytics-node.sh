@@ -130,13 +130,17 @@ echo "Installed Rust toolchain:"
 $HOME/.cargo/bin/rustup show
 
 # Install Libra build dependencies
+echo "Installing Libra Rust build dependencies"
 sudo apt install -y build-essential lld pkg-config libssl-dev libgmp-dev clang
 
 # Install Java (needed for Neo4j)
+echo "Installing Java"
 sudo apt install -y openjdk-17-jre-headless
 # Check what version we got
+echo "Java version:"
 java -version
 
+echo "Installing Neo4j"
 # Setup Neo4j package registry
 wget -O - https://debian.neo4j.com/neotechnology.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/neotechnology.gpg
 echo 'deb [signed-by=/etc/apt/keyrings/neotechnology.gpg] https://debian.neo4j.com stable latest' | sudo tee -a /etc/apt/sources.list.d/neo4j.list
@@ -144,9 +148,9 @@ sudo apt-get update
 
 # Install Neo4j
 # Magic needed first
-sudo add-apt-repository universe
+sudo add-apt-repository -y universe
 # Now install the package
-sudo apt-get install neo4j=1:5.25.1
+sudo apt-get install -y neo4j=1:5.25.1
 
 # End of long if block: Skip the package install stuff if so directed
 fi
