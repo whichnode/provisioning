@@ -156,7 +156,10 @@ sudo apt-get install -y neo4j=1:5.25.1
 fi
 
 # Configure Neo4j
-# TODO
+#    sudo neo4j-admin dbms set-initial-password ${password}
+#    sudo systemctl start neo4j
+#    sudo systemctl enable neo4j
+# Disable telemetry per: https://assets.neo4j.com/Official-Materials/Neo4j+Security+Benchmark_5.pdf
 
 # Message the user to check docker is working for them
 echo "Please log in again (docker will not work in this current shell) then:"
