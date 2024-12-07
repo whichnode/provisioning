@@ -158,9 +158,14 @@ fi
 # Configure Neo4j
 echo "Configuring Neo4j"
 
+# Needed for the GDS plugin install
+sudo apt-get install -y unzip
 # Download the GDS plugin
-wget -O - https://graphdatascience.ninja/neo4j-graph-data-science-2.12.0.zip > neo4j-graph-data-science.zip
-unzip neo4j-graph-data-science.zip
+neo4j_gds_plugin_name=neo4j-graph-data-science-2.12.0
+wget -q -O - https://graphdatascience.ninja/${neo4j_gds_plugin_name}.zip > /tmp/${neo4j_gds_plugin_name}.zip
+unzip /tmp/${neo4j_gds_plugin_name}.zip
+mv /tmp/${neo4j_gds_plugin_name}.jar /var/lib/neo4j/plugins 
+echo 'dbms.security.procedures.unrestricted=gds.*' >> /etc/neo4j/neo4j.conf
 
 strong_password() {
     # SO-senctioned way to generate a strong password cross-platform
@@ -171,10 +176,11 @@ neo4j_password=${LIBRA_NEO4J_NEW_INSTALL_PASSWORD:-"$(strong_password)"}
 # Set the admin user password
 sudo neo4j-admin dbms set-initial-password ${neo4j_password}
 # Disable telemetry per: https://assets.neo4j.com/Official-Materials/Neo4j+Security+Benchmark_5.pdf
+sudo sed -i 's/#dbms.usage_report.enabled=false/dbms.usage_report.enabled=false/g'
 sudo systemctl start neo4j
 # Auto start the server on system boot
 sudo systemctl enable neo4j
 
-neo4j_password_path=$HOME/.neo4j-password
+neo4j_password_path=/var/lib/neo4j/neo4j-password
 echo ${neo4j_password} > ${neo4j_password_path}
 echo "Wrote neo4j admin user password to: ${neo4j_password_path}"
