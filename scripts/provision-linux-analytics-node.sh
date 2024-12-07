@@ -163,7 +163,7 @@ sudo apt-get install -y unzip
 # Download the GDS plugin
 neo4j_gds_plugin_name=neo4j-graph-data-science-2.12.0
 wget -q -O - https://graphdatascience.ninja/${neo4j_gds_plugin_name}.zip > /tmp/${neo4j_gds_plugin_name}.zip
-unzip /tmp/${neo4j_gds_plugin_name}.zip
+unzip /tmp/${neo4j_gds_plugin_name}.zip -d /tmp
 mv /tmp/${neo4j_gds_plugin_name}.jar /var/lib/neo4j/plugins 
 echo 'dbms.security.procedures.unrestricted=gds.*' >> /etc/neo4j/neo4j.conf
 
