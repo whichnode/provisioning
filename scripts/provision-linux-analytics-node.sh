@@ -156,15 +156,24 @@ sudo apt-get install -y neo4j=1:5.25.1
 fi
 
 # Configure Neo4j
-#    sudo neo4j-admin dbms set-initial-password ${password}
-#    sudo systemctl start neo4j
-#    sudo systemctl enable neo4j
-# Disable telemetry per: https://assets.neo4j.com/Official-Materials/Neo4j+Security+Benchmark_5.pdf
+echo "Configuring Neo4j"
 
-# Message the user to check docker is working for them
-echo "Please log in again (docker will not work in this current shell) then:"
-echo "test that docker is correctly installed and working for your user by running the"
-echo "command below (it should print a message beginning \"Hello from Docker!\"):"
-echo
-echo "docker run hello-world"
-echo
+# Download the GDS plugin
+wget -O - https://graphdatascience.ninja/neo4j-graph-data-science-2.12.0.zip
+
+strong_password() {
+    # SO-senctioned way to generate a strong password cross-platform
+    openssl rand -base64 32 | tr -d '\/+=' | head -c 10 && echo
+}
+
+neo4j_password=${LIBRA_NEO4J_NEW_INSTALL_PASSWORD:-"$(strong_password)"}
+# Set the admin user password
+sudo neo4j-admin dbms set-initial-password ${neo4j_password}
+# Disable telemetry per: https://assets.neo4j.com/Official-Materials/Neo4j+Security+Benchmark_5.pdf
+sudo systemctl start neo4j
+# Auto start the server on system boot
+sudo systemctl enable neo4j
+
+neo4j_password_path=$HOME/.neo4j-password
+echo ${neo4j_password} > ${neo4j_password_path}
+echo "Wrote neo4j admin user password to: ${neo4j_password_path}"
