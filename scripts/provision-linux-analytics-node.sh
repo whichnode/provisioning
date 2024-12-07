@@ -159,7 +159,8 @@ fi
 echo "Configuring Neo4j"
 
 # Download the GDS plugin
-wget -O - https://graphdatascience.ninja/neo4j-graph-data-science-2.12.0.zip
+wget -O - https://graphdatascience.ninja/neo4j-graph-data-science-2.12.0.zip > neo4j-graph-data-science.zip
+unzip neo4j-graph-data-science.zip
 
 strong_password() {
     # SO-senctioned way to generate a strong password cross-platform
