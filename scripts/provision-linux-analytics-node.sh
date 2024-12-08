@@ -164,8 +164,9 @@ sudo apt-get install -y unzip
 neo4j_gds_plugin_name=neo4j-graph-data-science-2.12.0
 wget -q -O - https://graphdatascience.ninja/${neo4j_gds_plugin_name}.zip > /tmp/${neo4j_gds_plugin_name}.zip
 unzip /tmp/${neo4j_gds_plugin_name}.zip -d /tmp
+sudo chown neo4j:adm /tmp/${neo4j_gds_plugin_name}.jar
 sudo mv /tmp/${neo4j_gds_plugin_name}.jar /var/lib/neo4j/plugins
-sudo echo 'dbms.security.procedures.unrestricted=gds.*' >> /etc/neo4j/neo4j.conf
+sudo sh -c 'echo \'dbms.security.procedures.unrestricted=gds.*\' >> /etc/neo4j/neo4j.conf'
 
 strong_password() {
     # SO-senctioned way to generate a strong password cross-platform
