@@ -183,5 +183,6 @@ sudo systemctl start neo4j
 sudo systemctl enable neo4j
 
 neo4j_password_path=/var/lib/neo4j/neo4j-password
-sudo echo ${neo4j_password} > ${neo4j_password_path}
+sudo sh -c 'echo '${neo4j_password}' > '${neo4j_password_path}
+sudo chmod 600 ${neo4j_password_path}
 echo "Wrote neo4j admin user password to: ${neo4j_password_path}"
