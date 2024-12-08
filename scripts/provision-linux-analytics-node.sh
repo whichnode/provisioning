@@ -177,7 +177,7 @@ neo4j_password=${LIBRA_NEO4J_NEW_INSTALL_PASSWORD:-"$(strong_password)"}
 # Set the admin user password
 sudo neo4j-admin dbms set-initial-password ${neo4j_password}
 # Disable telemetry per: https://assets.neo4j.com/Official-Materials/Neo4j+Security+Benchmark_5.pdf
-sudo sed -i 's/#dbms.usage_report.enabled=false/dbms.usage_report.enabled=false/g'
+sudo sed -i 's/#dbms.usage_report.enabled=false/dbms.usage_report.enabled=false/g' /etc/neo4j/neo4j.conf
 sudo systemctl start neo4j
 # Auto start the server on system boot
 sudo systemctl enable neo4j
